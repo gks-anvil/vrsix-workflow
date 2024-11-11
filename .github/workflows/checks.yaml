@@ -6,6 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/sprocket-action@main
+      - uses: stjude-rust-labs/sprocket-action@main
         with:
           lint: true

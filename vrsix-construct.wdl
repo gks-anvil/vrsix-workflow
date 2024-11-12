@@ -3,15 +3,15 @@ version 1.0
 workflow vrsix_construct {
     meta {
         author: "GKS-AnVIL"
-        description: "TODO insert description here"
+        description: "Extract VRS variation annotations from a VCF and load them into a vrsix index database."
         outputs: {
-            updated_db_path: "description todo"
+            updated_db_path: "Path to updated index database."
         }
     }
 
     parameter_meta {
-        vcf_path: "describe"
-        index_db_path: "describe"
+        vcf_path: "Path to VRS-annotated VCF."
+        index_db_path: "Path to existing index database file."
     }
 
     input {
@@ -31,15 +31,15 @@ workflow vrsix_construct {
 
 task vrsix {
     meta {
-        description: "todo describe"
+        description: "Load VCF into index database."
         outputs: {
-            updated_db_path: "describe todo"
+            updated_db_path: "Path to updated index database."
         }
     }
 
     parameter_meta {
-        vcf_path: "todo describe"
-        index_db_path: "todo describe"
+        vcf_path: "Path to VRS-annotated VCF."
+        index_db_path: "Path to index database file."
     }
 
     input {

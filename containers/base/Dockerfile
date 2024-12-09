@@ -1,6 +1,6 @@
 # TODO python version
-from circleci/python:3.11
+from circleci/python:3.12
 
-RUN pip install git+https://github.com/gks-anvil/vrsix.git
+RUN pip install vrsix~=0.0.1
 
 CMD ["/bin/bash"]

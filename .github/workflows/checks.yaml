@@ -9,3 +9,9 @@ jobs:
       - uses: stjude-rust-labs/sprocket-action@main
         with:
           lint: true
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: gks-anvil/wdl-test@main
+        with:
+          wdl_file:

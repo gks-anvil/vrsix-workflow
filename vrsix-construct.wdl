@@ -58,7 +58,7 @@ task vrsix {
     }
 
     runtime {
-        docker: "ubuntu@sha256:foobar"
+        docker: "ubuntu@sha256:foobar"  # TODO update
         disks: "local-disk" + disk_size + " SSD"
         bootDiskSizeGb: disk_size
         memory: "8G"

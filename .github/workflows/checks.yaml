@@ -14,4 +14,5 @@ jobs:
     steps:
       - uses: gks-anvil/wdl-test@main
         with:
-          wdl_file:
+          wdl_file: vrsix-construct.wdl
+          test_parameters: test/test_inputs.json

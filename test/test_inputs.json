@@ -1,0 +1,4 @@
+{
+  "vrsix_construct.vcf_path": "test/test_vcf_input.vcf",
+  "vrsix_construct.index_db_path": "test/test_index_input.db"
+}

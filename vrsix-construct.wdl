@@ -5,7 +5,7 @@ workflow vrsix_construct {
         author: "GKS-AnVIL"
         description: "Extract VRS variation annotations from a VCF and load them into a vrsix index database."
         outputs: {
-            updated_db_path: "Path to updated index database."
+            updated_db_path: "Path to updated index database.",
         }
     }
 
@@ -33,7 +33,7 @@ task vrsix {
     meta {
         description: "Load VCF into index database."
         outputs: {
-            updated_db_path: "Path to updated index database."
+            updated_db_path: "Path to updated index database.",
         }
     }
 
@@ -58,7 +58,7 @@ task vrsix {
     }
 
     runtime {
-        docker: "ubuntu@sha256:foobar"  # TODO update
+        docker: "ghcr.io/gks-anvil/vrsix-workflow:latest"
         disks: "local-disk" + disk_size + " SSD"
         bootDiskSizeGb: disk_size
         memory: "8G"

@@ -21,7 +21,7 @@ workflow vrsix_construct {
 }
 
 task vrsix {
-    
+
     input {
         File vcf_file
         File? existing_index_db_file
@@ -55,7 +55,7 @@ task vrsix {
 
     runtime {
         docker: "quay.io/ohsu-comp-bio/vrsix:0.2.0" 
-        disks: "local-disk" + disk_size + " SSD"
+        disks: "local-disk " + disk_size + " SSD"
         bootDiskSizeGb: disk_size
         memory: "8G"
     }

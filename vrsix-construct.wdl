@@ -1,6 +1,19 @@
 version 1.0
 
 workflow vrsix_construct {
+    meta {
+        author: "GKS-AnVIL"
+        description: "Extract VRS variation annotations from a VCF and load them into a vrsix index database."
+        outputs: {
+            updated_db_path: "Path to updated index database."
+        }
+    }
+
+    parameter_meta {
+        vcf_file: "Path to VRS-annotated VCF."
+        existing_index_db_file: "Path to existing index database file."
+        new_index_db_path: "Path to write new index database."
+    }
 
     input {
         File vcf_file
@@ -21,6 +34,18 @@ workflow vrsix_construct {
 }
 
 task vrsix {
+    meta {
+        description: "Load VCF into index database."
+        outputs: {
+            updated_db_path: "Path to updated index database."
+        }
+    }
+
+    parameter_meta {
+        vcf_file: "Path to VRS-annotated VCF."
+        existing_index_db_file: "Path to existing index database file."
+        new_index_db_path: "Path to write new index database."
+    }
 
     input {
         File vcf_file

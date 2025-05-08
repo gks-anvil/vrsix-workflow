@@ -56,25 +56,32 @@ task vrsix {
     Int disk_size = ceil(3*size(vcf_file, "GB") + 10)
 
     command <<<
-        # check if file path was localized before creating index
+        # if existing index provided, add to it
         if [ "~{existing_index_db_file}" ]; then
             echo "using existing_index_db_file"
             vrsix load --db-location ~{existing_index_db_file} ~{vcf_file}
+
+            # rename existing index if new index path provided
+            if  [ "~{new_index_db_path}" ]; then
+                mv ~{existing_index_db_file} ~{new_index_db_path}
+            fi
+
+        # if new index provided just create a new index
         elif  [ "~{new_index_db_path}" ]; then
             echo "using new_index_db_path"
             vrsix load --db-location ~{new_index_db_path} ~{vcf_file}
+
+        # else throw error if none provided
         else
             echo "Neither a new index path nor existing index file was specified. Please specify one." >&2
             exit 1
         fi
-
-        
     >>>
 
     output {
         File updated_db_path = select_first([
-            existing_index_db_file,
-            new_index_db_path
+            new_index_db_path,
+            existing_index_db_file
         ])
     }
 

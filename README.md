@@ -12,7 +12,7 @@
 To write output file paths to directly to a Terra data table, specify the outputs in the Output tab on the workflow page, specifically:
 - `output_vcf` (File): column in a Terra data table to write the VRS-annotated VCF to
 
-For more info on how to write workflow ouputs to the data table, see the [Terra docs](https://support.terra.bio/hc/en-us/articles/4500420806299-Writing-workflow-outputs-to-the-data-table)
+For more info on how to write workflow ouputs to the data table, see the [Terra docs](https://support.terra.bio/hc/en-us/articles/4500420806299-Writing-workflow-outputs-to-the-data-table).
 
 **Note:** If you encounter an error like "loading_module.VcfError: Expected Array variant" when running the workflow, make sure your VRSified VCF stores `VRS_Start` and `VRS_Stop` values in the INFO field! VCFs annotated only with `VRS_Allele_IDs` are not enough at the moment, we hope to make this clearer in future work addressed [here](https://github.com/gks-anvil/vrsix/issues/42).
 

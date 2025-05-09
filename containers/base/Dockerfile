@@ -1,6 +1,6 @@
 # TODO python version
-from circleci/python:3.12
+FROM python:3.12.10-slim-bullseye
 
-RUN pip install vrsix~=0.1.2
+RUN pip install vrsix~=0.2.0
 
 CMD ["/bin/bash"]

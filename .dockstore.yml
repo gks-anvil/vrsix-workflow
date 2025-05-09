@@ -3,18 +3,13 @@ workflows:
 - name: VrsixConstruct
   subclass: WDL
   primaryDescriptorPath: /vrsix-construct.wdl
-  # testParameterFiles:
-  # - /test/test_inputs.json
   readMePath: /README.md
   authors:
     - name: James Stevenson
       email: james.stevenson@nationwidechildrens.org
       affiliation: Nationwide Children's Hospital
       role: Bioinformatics Software Developer
-# notebooks:
-#   - path: /example-analysis.ipynb
-#     name: VRSAnnotatorExampleAnalysis
-#     format: JUPYTER
-#     language: PYTHON
-#     topic: Example analysis notebook for a VRS annotated VCF
-#     publish: true
+    - name: Quinn Wai Wong
+      email: wongq@ohsu.edu
+      affiliation: Oregon Health & Science University
+      role: Research Engineer

@@ -10,18 +10,22 @@ workflow vrsix_construct {
     }
 
     parameter_meta {
-        vcf_path: "Path to VRS-annotated VCF."
-        index_db_path: "Path to existing index database file."
+        vcf_file: "Path to VRS-annotated VCF."
+        existing_index_db_file: "Path to existing index database file."
+        new_index_db_path: "Path to write new index database."
     }
 
     input {
-        File vcf_path
-        File index_db_path
+        File vcf_file
+        File? existing_index_db_file
+        String? new_index_db_path
     }
 
-    call vrsix { input:
-        vcf_path = vcf_path,
-        index_db_path = index_db_path,
+    call vrsix {
+        input:
+            vcf_file = vcf_file,
+            existing_index_db_file = existing_index_db_file,
+            new_index_db_path = new_index_db_path,
     }
 
     output {
@@ -38,28 +42,52 @@ task vrsix {
     }
 
     parameter_meta {
-        vcf_path: "Path to VRS-annotated VCF."
-        index_db_path: "Path to index database file."
+        vcf_file: "Path to VRS-annotated VCF."
+        existing_index_db_file: "Path to existing index database file."
+        new_index_db_path: "Path to write new index database."
     }
 
     input {
-        File vcf_path
-        File index_db_path
+        File vcf_file
+        File? existing_index_db_file
+        String? new_index_db_path
     }
 
-    Int disk_size = ceil(size(vcf_path, "GB") + 10)
+    Int disk_size = ceil(3*size(vcf_file, "GB") + 10)
 
     command <<<
-        vrsix load --db-location ~{index_db_path} ~{vcf_path}
+        # if existing index provided, add to it
+        if [ "~{existing_index_db_file}" ]; then
+            echo "using existing_index_db_file"
+            vrsix load --db-location ~{existing_index_db_file} ~{vcf_file}
+
+            # rename existing index if new index path provided
+            if  [ "~{new_index_db_path}" ]; then
+                mv ~{existing_index_db_file} ~{new_index_db_path}
+            fi
+
+        # if new index provided just create a new index
+        elif  [ "~{new_index_db_path}" ]; then
+            echo "using new_index_db_path"
+            vrsix load --db-location ~{new_index_db_path} ~{vcf_file}
+
+        # else throw error if none provided
+        else
+            echo "Neither a new index path nor existing index file was specified. Please specify one." >&2
+            exit 1
+        fi
     >>>
 
     output {
-        File updated_db_path = "~{index_db_path}"
+        File updated_db_path = select_first([
+            new_index_db_path,
+            existing_index_db_file
+        ])
     }
 
     runtime {
-        docker: "ubuntu@sha256:foobar"  # TODO update
-        disks: "local-disk" + disk_size + " SSD"
+        docker: "quay.io/ohsu-comp-bio/vrsix:0.2.0" 
+        disks: "local-disk " + disk_size + " SSD"
         bootDiskSizeGb: disk_size
         memory: "8G"
     }

@@ -10,8 +10,8 @@
 - `new_index_db_path` (String, optional): path to write a new index_db_path, which must end in `.db`. If no `existing_index_db_file` is specified, `new_index_db_path` must be specified.
    
 To put things another way, there are three ways to specify the index db depending on your needs:
-1. To create a new index using an existing index, specify both an `existing_index_db_file` and a `new_index_db_path`. The `new_index_db_path` will be the outputted file name of the combined index.
-2. To create a new index from scratch, specify just a `new_index_db_path`.
+1. To create a new index from scratch, specify just a `new_index_db_path`. This is useful to get started creating indices
+2. To create a new index using an existing index, specify both an `existing_index_db_file` and a `new_index_db_path`. The `new_index_db_path` will be the outputted file name of the combined index. This might be useful if you want to index multiple VCFs in a single file.
 3. [not recommended] If you don't care about a long outputted index file name, specify only the `existing_index_db_file`.
 
 Specifying neither of the two options will result in an error and no index will be created.

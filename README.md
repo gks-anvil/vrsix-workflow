@@ -1,11 +1,28 @@
 # VRSix Terra workflow
 
-## Prerequisites
-- VRS-Annotated VCF with (see [VRS Annotator](https://github.com/gks-anvil/vrs-annotator/) for more info!)
+## Description
+The vrsix Terra workflow is a wrapper around the [vrsix](https://github.com/gks-anvil/vrsix) CLI tool. Using this workflow allows you to better interface with VCFs using VRS IDs, such as getting VCF rows by VRS ID or by fully-justified VRS coordinates!
+
+## Usage
+To get started, you will need a fully VRS-annotated VCF. Confirm that your VCF contains the following info fields:
+- VRS_Allele_IDs
+- VRS_Starts
+- VRS_Stops
+
+For example, confirm that chr1.vcf has the required fields.
+
+```
+bcftools view -h chr1.vcf | grep '^##INFO='
+```
+
+To annotate your VCFs on Terra, see the [VRS Annotator](https://github.com/gks-anvil/vrs-annotator/) workflow.
+
+Import the workflow into your Terra Workspace using [Dockstore](https://dockstore.org/workflows/github.com/gks-anvil/vrsix-workflow/VrsixConstruct:main?tab=info). To learn more about how to run the workflow:
+
 
 ## Inputs
 
-- `vcf_file` (File): path to the VCF file of interest
+- `vcf_file` (File): path to the VRS VCF file of interest. Must contain VRS IDs as well as VRS coordinates (`VRS_Starta` and `VRS_Stops`) for each variant.
 - `existing_index_db_file` (File, optional): Path to an existing vrsix index, which must end in `.db`. A new index will be created using the provided VCF. It is recommended to specify both `existing_index_db_file` and `new_index_db_path`. Without a `new_index_db_path`, the filename will be the entire path to the `existing_index_db_file` and becomes quite lengthy.
 - `new_index_db_path` (String, optional): path to write a new index_db_path, which must end in `.db`. If no `existing_index_db_file` is specified, `new_index_db_path` must be specified.
    
